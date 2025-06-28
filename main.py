@@ -1,8 +1,11 @@
 import os
+import time
 import selenium.webdriver as webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,6 +21,7 @@ firefox_options.set_preference('general.useragent.override', User_Agent)
 browser = webdriver.Firefox(service=firefox_service, options=firefox_options)
 browser.get("https://www.catolicasc.org.br/")
 
+wait = WebDriverWait(browser, 10)
 
 # Tela cheia
 browser.maximize_window()
@@ -32,9 +36,10 @@ portal_do_aluno.click()
 windows = browser.window_handles
 browser.switch_to.window(windows[1])
 
+time.sleep(3)
 usuario = browser.find_element(By.ID, "User")
 usuario.send_keys("rafael.anjos")
 senha = browser.find_element(By.ID, "Pass")
-senha.send_keys(secret)
+senha.send_keys('sada')
 botao_acessar = browser.find_element(By.XPATH, "//input[@type='submit']")
 botao_acessar.click()

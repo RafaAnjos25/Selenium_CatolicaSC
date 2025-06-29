@@ -1,27 +1,13 @@
-import os
-import time
+import os, time
 import selenium.webdriver as webdriver
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
 
 load_dotenv()
 secret = os.environ.get('SENHA')
 
-# F12 no firefox va em Network clique em alguem get ou post depois Request Headers e copie o User-Agent
-User_Agent = 'Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0'
-firefox_driver = os.path.join(os.getcwd(), 'geckodriver')
-firefox_service = Service(firefox_driver)
-firefox_options = Options()
-firefox_options.set_preference('general.useragent.override', User_Agent)
-
-browser = webdriver.Firefox(service=firefox_service, options=firefox_options)
+browser = webdriver.Firefox()
 browser.get("https://www.catolicasc.org.br/")
-
-wait = WebDriverWait(browser, 10)
 
 # Tela cheia
 browser.maximize_window()
@@ -37,9 +23,32 @@ windows = browser.window_handles
 browser.switch_to.window(windows[1])
 
 time.sleep(3)
-usuario = browser.find_element(By.ID, "User")
-usuario.send_keys("rafael.anjos")
-senha = browser.find_element(By.ID, "Pass")
-senha.send_keys('sada')
-botao_acessar = browser.find_element(By.XPATH, "//input[@type='submit']")
-botao_acessar.click()
+try:
+    usuario = browser.find_element(By.ID, "User")
+    usuario.send_keys("rafael.anjos")
+    senha = browser.find_element(By.ID, "Pass")
+    senha.send_keys('sadaasdsadassdasd')
+    botao_acessar = browser.find_element(By.XPATH, "//input[@type='submit']")
+    botao_acessar.click()
+    url_atual = browser.current_url
+    url_esperada = "https://portal.catolicasc.org.br/Corpore.Net//Source/EDU-EDUCACIONAL/Public/EduPortalAlunoLogin.aspx?AutoLoginType=ExternalLogin&undefined"
+    assert url_atual == url_esperada
+    time.sleep(3)
+    browser.back()
+except Exception as e:
+    print(f"Pagina diferente da esperada") 
+
+time.sleep(3)
+try:
+    usuario = browser.find_element(By.ID, "User")
+    usuario.send_keys("rafael.anjos")
+    senha = browser.find_element(By.ID, "Pass")
+    senha.send_keys(secret)
+    botao_acessar = browser.find_element(By.XPATH, "//input[@type='submit']")
+    botao_acessar.click()
+    time.sleep(3)
+    url_atual = browser.current_url
+    url_esperada = "https://portal.catolicasc.org.br/FrameHTML//web/app/edu/PortalEducacional/#/"
+    assert url_atual == url_esperada
+except Exception as e:
+    print(f"Pagina diferente da esperada") 

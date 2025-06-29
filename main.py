@@ -30,10 +30,10 @@ try:
     senha.send_keys('sadaasdsadassdasd')
     botao_acessar = browser.find_element(By.XPATH, "//input[@type='submit']")
     botao_acessar.click()
-    url_atual = browser.current_url
-    url_esperada = "https://portal.catolicasc.org.br/Corpore.Net//Source/EDU-EDUCACIONAL/Public/EduPortalAlunoLogin.aspx?AutoLoginType=ExternalLogin&undefined"
-    assert url_atual == url_esperada
-    time.sleep(3)
+    url_atual1 = browser.current_url
+    url_esperada1 = "https://portal.catolicasc.org.br/Corpore.Net//Source/EDU-EDUCACIONAL/Public/EduPortalAlunoLogin.aspx?AutoLoginType=ExternalLogin&undefined"
+    assert url_atual1 == url_esperada1
+    time.sleep(2)
     browser.back()
 except Exception as e:
     print(f"Pagina diferente da esperada") 
@@ -47,8 +47,19 @@ try:
     botao_acessar = browser.find_element(By.XPATH, "//input[@type='submit']")
     botao_acessar.click()
     time.sleep(3)
-    url_atual = browser.current_url
-    url_esperada = "https://portal.catolicasc.org.br/FrameHTML//web/app/edu/PortalEducacional/#/"
-    assert url_atual == url_esperada
+    url_atual2 = browser.current_url
+    url_esperada2 = "https://portal.catolicasc.org.br/FrameHTML//web/app/edu/PortalEducacional/#/"
+    assert url_atual2 == url_esperada2
 except Exception as e:
     print(f"Pagina diferente da esperada") 
+
+browser.get("https://www.catolicasc.org.br/")
+
+try:
+    botao_bolsas = browser.find_element(By.LINK_TEXT, "Bolsas e Financiamentos")
+    botao_bolsas.click()
+    url_atual3 = browser.current_url
+    url_esperada3 = "https://www.catolicasc.org.br/academicos/bolsas-e-financiamentos/"
+    assert url_atual3 == url_esperada3
+except Exception as e:
+    print("Botao nao encontrado")

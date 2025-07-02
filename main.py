@@ -81,6 +81,5 @@ else:
     print("Pass and user sucess test. FAIL")
 
 
-
 wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".ico-notas"))).click()
-print("button notas")
+print("Click on notas. OK")

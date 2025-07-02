@@ -1,6 +1,7 @@
 import os, time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
@@ -83,3 +84,13 @@ else:
 
 wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".ico-notas"))).click()
 print("Click on notas. OK")
+
+wait.until(EC.element_to_be_clickable((By.NAME, "controller_periodoletivo"))).click()
+print("Click on periodo. OK")
+
+select = Select(browser.find_element(By.NAME, "controller_periodoletivo"))
+select.select_by_value("202423")
+print("Select periodo. OK")
+
+browser.quit()
+print("END TEST")

@@ -68,7 +68,7 @@ botao_acessar = browser.find_element(By.XPATH, "//input[@type='submit']")
 botao_acessar.click()
 print("Access Button. Ok")
 
-time.sleep(7)
+time.sleep(15)
 print("Wait catolica pages. OK")
 
 wait.until(EC.element_to_be_clickable((By.ID, "show-menu")))
@@ -81,16 +81,6 @@ if url_atual2 == url_esperada2:
 else:
     print("Pass and user sucess test. FAIL")
 
-
-wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".ico-notas"))).click()
-print("Click on notas. OK")
-
-wait.until(EC.element_to_be_clickable((By.NAME, "controller_periodoletivo"))).click()
-print("Click on periodo. OK")
-
-select = Select(browser.find_element(By.NAME, "controller_periodoletivo"))
-select.select_by_value("202423")
-print("Select periodo. OK")
 
 browser.quit()
 print("END TEST")
